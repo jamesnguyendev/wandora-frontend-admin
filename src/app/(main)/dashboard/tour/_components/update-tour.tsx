@@ -23,6 +23,15 @@ import {
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -32,9 +41,9 @@ const formSchema = z.object({
   id: z.string().min(3),
   title: z.string().min(3),
   description: z.string().min(3),
-  latitude: z.coerce.number().min(3),
-  longitude: z.coerce.number().min(3),
-  priceBase: z.coerce.number().min(3),
+  latitude: z.coerce.number(),
+  longitude: z.coerce.number(),
+  priceBase: z.coerce.number().min(0),
   type: z.enum(["room", "experience"]),
 });
 
@@ -149,6 +158,30 @@ const UpdateTour = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
                 />
                 <FormField
                   control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel htmlFor="type">Type</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Types</SelectLabel>
+                              <SelectItem value="room">Room</SelectItem>
+                              <SelectItem value="experience">Experience</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="priceBase"
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-3">
@@ -176,7 +209,7 @@ const UpdateTour = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
               </div>
             </div>
             <DrawerFooter>
-              <Button disabled={loading} type="submit">
+              <Button disabled={loading} type="submit" className="cursor-pointer">
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Confirm"}
               </Button>
               <DrawerClose asChild>

@@ -10,8 +10,13 @@ const nextConfig = {
         destination: "/dashboard/tour",
         permanent: false,
       },
+      {
+        source: "/",
+        destination: "/dashboard/tour",
+        permanent: false,
+      },
     ];
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

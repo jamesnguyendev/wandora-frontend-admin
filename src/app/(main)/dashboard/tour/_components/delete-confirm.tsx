@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { DeleteTour } from "@/actions";
 import { Button } from "@/components/ui/button";
@@ -9,12 +9,15 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export function TourConfirm({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   const handleDelete = () => {
-    DeleteTour(id);
-    router.refresh();
-    setOpen(false);
+    try {
+      setOpen(false);
+      DeleteTour(id);
+      toast.success("Delete data successful");
+    } catch (err) {
+      toast.error("Delete failed");
+    }
   };
 
   return (

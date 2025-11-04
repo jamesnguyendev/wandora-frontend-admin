@@ -18,9 +18,8 @@ export const DeleteTour = async (id: string) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.error("res delete tour:", res);
+    return res.data;
   } catch (error) {
-    console.error("Error delete tour:", error);
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data?.message && "Failed to delete tour");
     }

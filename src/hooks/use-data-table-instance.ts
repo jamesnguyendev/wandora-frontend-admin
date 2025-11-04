@@ -3,13 +3,13 @@ import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   VisibilityState,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -21,24 +21,30 @@ type UseDataTableInstanceProps<TData, TValue> = {
   defaultPageIndex?: number;
   defaultPageSize?: number;
   getRowId?: (row: TData, index: number) => string;
+  manualPagination?: boolean;
+  pageCount?: number;
+  onPaginationChange?: (updater: PaginationState | ((old: PaginationState) => PaginationState)) => void;
 };
 
 export function useDataTableInstance<TData, TValue>({
   data,
   columns,
   enableRowSelection = true,
-  defaultPageIndex,
-  defaultPageSize,
+  defaultPageIndex = 0,
+  defaultPageSize = 10,
   getRowId,
+  manualPagination = false,
+  pageCount,
+  onPaginationChange,
 }: UseDataTableInstanceProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const [globalFilter, setGlobalFilter] = React.useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = React.useState<string>("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [pagination, setPagination] = React.useState({
-    pageIndex: defaultPageIndex ?? 0,
-    pageSize: defaultPageSize ?? 10,
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: defaultPageIndex,
+    pageSize: defaultPageSize,
   });
 
   const table = useReactTable({
@@ -53,19 +59,29 @@ export function useDataTableInstance<TData, TValue>({
       pagination,
     },
     enableRowSelection,
-    getRowId: getRowId ?? ((row) => (row as any).id.toString()),
+    getRowId: getRowId ?? ((row, i) => (row as any).id?.toString?.() ?? i.toString()),
+
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+
+    onPaginationChange: (updater) => {
+      const newState = typeof updater === "function" ? updater(pagination) : updater;
+      setPagination(newState);
+      onPaginationChange?.(newState);
+    },
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+
+    manualPagination,
+    pageCount: manualPagination ? (pageCount ?? -1) : undefined,
+    ...(manualPagination ? {} : { getPaginationRowModel: undefined }),
   });
 
   return table;

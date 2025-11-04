@@ -22,15 +22,24 @@ import {
 } from "@/components/ui/drawer";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const formSchema = z.object({
   title: z.string().min(3),
   description: z.string().min(3),
-  latitude: z.coerce.number().min(3),
-  longitude: z.coerce.number().min(3),
-  priceBase: z.coerce.number().min(3),
+  latitude: z.coerce.number(),
+  longitude: z.coerce.number(),
+  priceBase: z.coerce.number().min(0),
   type: z.enum(["room", "experience"]),
 });
 
@@ -38,7 +47,7 @@ const AddTour = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const { data: session } = useSession();
-  const accessToken = session?.user.accessToken || "";
+  const accessToken = session?.user.accessToken ?? "";
 
   const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -131,6 +140,30 @@ const AddTour = () => {
                       <FormLabel htmlFor="longitude">Longitude</FormLabel>
                       <FormControl>
                         <Input {...field} id="longitude" placeholder="106.67" type="number" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel htmlFor="type">Type</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Types</SelectLabel>
+                              <SelectItem value="room">Room</SelectItem>
+                              <SelectItem value="experience">Experience</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
