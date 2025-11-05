@@ -46,7 +46,7 @@ export function LoginForm() {
         toast.error("Invalid email and password!");
       } else {
         toast.success("Login successful 🎉");
-        router.push("/dashboard/tour");
+        router.push("/");
       }
     } finally {
       setLoading(false);
