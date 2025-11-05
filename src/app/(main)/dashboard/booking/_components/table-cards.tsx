@@ -29,7 +29,7 @@ export function TableCards({ data }: { data: ResponseBooking }) {
                 value={table.getState().globalFilter ?? ""}
                 onChange={(value) => table.setGlobalFilter(String(value))}
                 className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 text-sm font-medium outline-none has-[>svg]:px-2.5"
-                placeholder="Tìm: Follower, Master."
+                placeholder="Search by : price."
               />
               <DataTableViewOptions table={table} />
             </div>
