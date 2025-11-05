@@ -29,9 +29,7 @@ With a focus on performance, scalability, and clean architecture, this dashboard
 - **TypeScript**
 - **Tailwind CSS 4**
 - **Radix UI / ShadCN UI**
-- **Zustand** for state management
 - **TanStack Query & Table**
-- **Recharts** for analytics visualization
 - **Next-Themes** for dark/light mode
 
 ### **Backend**
@@ -51,7 +49,7 @@ With a focus on performance, scalability, and clean architecture, this dashboard
 
 ```bash
 # 1️⃣ Clone the repository
-git clone https://github.com/your-org/wandora-frontend-admin.git
+git clone https://github.com/jamesnguyendev/wandora-frontend-admin.git
 cd wandora-frontend-admin
 
 # 2️⃣ Install dependencies
