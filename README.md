@@ -8,18 +8,6 @@ With a focus on performance, scalability, and clean architecture, this dashboard
 
 ---
 
-## ✨ Key Features
-
-- **Performance Analytics:** Track vital metrics like P&L (Profit & Loss), Max Drawdown, and Win/Loss Ratios.
-- **Visual Trading Charts:** Interactive charts for trading history and performance.
-- **Order Book Management:** View pending and executed orders in real-time.
-- **Multi-Exchange Integration:** Connect to multiple trading exchanges (if applicable).
-- **Dark/Light Mode:** User interface preference options.
-- **Authentication & Security:** Secure login using NextAuth.js with bcrypt password hashing.
-- **Customizable UI:** Drag & Drop layout customization powered by `@dnd-kit`.
-
----
-
 ## 🛠️ Technology Stack
 
 ### **Frontend**
@@ -56,8 +44,12 @@ cd wandora-frontend-admin
 npm install
 
 # 3️⃣ Set up environment variables
-cp .env
+cp .env.example .env.local
+```
 
+Then edit your `.env.local` file:
+
+```bash
 NEXTAUTH_SECRET=your-secret-key
 NEXTAUTH_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
@@ -65,62 +57,57 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api
 
 ---
 
-### **Project Structure**
+## 🧱 Project Structure
 
+```
 wandora-frontend-admin/
 │
 ├── src/
-│ ├── app/ # Next.js app router pages
-│ ├── components/ # Shared React UI components
-│ ├── hooks/ # Custom React hooks
-│ ├── lib/ # Utility functions and constants
-│ ├── store/ # Zustand stores (global state)
-│ ├── types/ # TypeScript interfaces and models
-│ ├── utils/ # Helper functions (token, format, etc.)
-│ └── scripts/ # Node scripts (theme generation, etc.)
+│   ├── app/            # Next.js app router pages
+│   ├── components/     # Shared React UI components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions and constants
+│   ├── store/          # Zustand stores (global state)
+│   ├── types/          # TypeScript interfaces and models
+│   ├── utils/          # Helper functions (token, format, etc.)
+│   └── scripts/        # Node scripts (theme generation, etc.)
 │
-├── public/ # Static assets (images, icons, etc.)
-├── styles/ # Global styles or Tailwind configs
-├── .env # Example environment configuration
-├── package.json # Dependencies and project scripts
-├── tsconfig.json # TypeScript configuration
-├── tailwind.config.ts # Tailwind configuration
-└── README.md # Documentation
-
-============================================================
-🔐 SECURITY
-============================================================
-
-• Passwords are hashed using bcrypt before storage.
-• Authentication is handled securely with NextAuth.js.
-• Environment variables are safely managed through .env.local.
-• Adheres to OWASP and Next.js security best practices.
-• Linting includes eslint-plugin-security and eslint-plugin-sonarjs
-for static code analysis.
+├── public/             # Static assets (images, icons, etc.)
+├── styles/             # Global styles or Tailwind configs
+├── .env.example        # Example environment configuration
+├── package.json        # Dependencies and project scripts
+├── tsconfig.json       # TypeScript configuration
+├── tailwind.config.ts  # Tailwind configuration
+└── README.md           # Documentation
+```
 
 ---
 
-============================================================
-📦 DEPLOYMENT
-============================================================
+## 🔐 Security
+
+Passwords are hashed using **bcrypt** before storage.  
+Authentication is handled securely with **NextAuth.js**.  
+Environment variables are safely managed through **.env.local**.  
+Adheres to **OWASP** and **Next.js** security best practices.  
+Linting includes **eslint-plugin-security** and **eslint-plugin-sonarjs** for static code analysis.
+
+---
+
+## 📦 Deployment
 
 You can deploy easily to the following platforms:
 
-→ Vercel (recommended for Next.js)
-→ Netlify
-→ Render
-→ Any Node.js-based hosting platform
+- **Vercel** (recommended for Next.js)
+- **Netlify**
+- **Render**
+- **Any Node.js–based hosting platform**
 
-⚙️ Make sure your environment variables are correctly configured
+⚙️ Make sure your environment variables are correctly configured  
 in your deployment environment.
 
 ---
 
-============================================================
-📜 LICENSE
-============================================================
+## 📜 License
 
-MIT License © 2025 James Nguyen / Org
-Project: wandora-frontend-admin
-
-============================================================
+MIT License © 2025 **James Nguyen / Org**  
+**Project:** wandora-frontend-admin
