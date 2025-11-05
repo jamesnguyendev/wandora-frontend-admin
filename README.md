@@ -44,10 +44,10 @@ cd wandora-frontend-admin
 npm install
 
 # 3️⃣ Set up environment variables
-cp .env.example .env.local
+cp .env
 ```
 
-Then edit your `.env.local` file:
+Then edit your `.env` file:
 
 ```bash
 NEXTAUTH_SECRET=your-secret-key
