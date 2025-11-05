@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle, Loader2 } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
@@ -46,8 +45,6 @@ const formSchema = z.object({
 const AddTour = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
-  const { data: session } = useSession();
-  const accessToken = session?.user.accessToken ?? "";
 
   const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -74,7 +71,7 @@ const AddTour = () => {
         type: values.type,
       };
 
-      const res = await addTour(payload, accessToken);
+      const res = await addTour(payload);
 
       if (res.code !== 201) return;
 

@@ -20,6 +20,7 @@ export function Providers({
       themePreset={themePreset as "tangerine" | "soft-pop" | "default" | "brutalist"}
     >
       <SessionProvider>{children}</SessionProvider>
+      {/* <AuthProvider></AuthProvider> Automattic for refresh token */}
       <Toaster />
     </PreferencesStoreProvider>
   );
