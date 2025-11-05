@@ -2,9 +2,11 @@ import z from "zod";
 
 export const recentLeadSchema = z.object({
   id: z.string(),
-  email: z.string(),
-  role: z.enum(["guest", "admin"]),
-  verified: z.boolean(),
+  userId: z.string(),
+  listingId: z.string(),
+  startDate: z.string(),
+  endDate: z.string(),
+  totalPrice: z.number(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

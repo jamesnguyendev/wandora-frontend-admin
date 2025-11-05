@@ -4,8 +4,9 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
+import { booking } from "@/types/booking";
 
-export async function getUsers() {
+export const updateBooking = async (payload: Partial<booking>) => {
   const session = await getServerSession(authOptions);
 
   if (!session) throw new Error("Unauthorized");
@@ -13,17 +14,17 @@ export async function getUsers() {
   const accessToken = session.user.accessToken;
 
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+    const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/bookings/${payload.id}`, payload, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.data;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error update booking:", error);
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message && "Failed to fetch users");
+      throw new Error(error.response?.data?.message && "Failed to update booking");
     }
-    throw new Error("Failed to fetch users");
+    throw new Error("Failed to update booking");
   }
-}
+};

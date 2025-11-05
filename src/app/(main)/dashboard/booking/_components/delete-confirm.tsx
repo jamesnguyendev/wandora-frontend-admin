@@ -2,17 +2,24 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { DeleteFollower } from "@/actions/follower/delete-follower";
+import { toast } from "sonner";
+
+import { DeleteBooking } from "@/actions";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
-export function DeleteConfirm({ id }: { id: number }) {
+export function DeleteConfirm({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const handleDelete = () => {
-    DeleteFollower(id);
+  const handleDelete = async () => {
+    const res = await DeleteBooking(id);
+
+    if (res.code !== 200) return;
+
+    toast.success(res.message ?? "Update successful");
+
     router.refresh();
     setOpen(false);
   };
@@ -26,20 +33,20 @@ export function DeleteConfirm({ id }: { id: number }) {
           setOpen(true);
         }}
       >
-        Xóa
+        Delete
       </DropdownMenuItem>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Bạn có chắc chắn muốn xóa?</DialogTitle>
+            <DialogTitle>Do you want to delete?</DialogTitle>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpen(false)}>
-              Hủy
+              Cancel
             </Button>
             <Button variant="destructive" onClick={handleDelete}>
-              Xóa
+              Delete
             </Button>
           </DialogFooter>
         </DialogContent>

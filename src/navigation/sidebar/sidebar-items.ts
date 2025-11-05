@@ -1,4 +1,4 @@
-import { type LucideIcon, PlaneTakeoff, ConciergeBell } from "lucide-react";
+import { type LucideIcon, PlaneTakeoff, ConciergeBell, Users } from "lucide-react";
 
 export interface NavSubItem {
   title: string;
@@ -30,11 +30,17 @@ export const sidebarItems: NavGroup[] = [
     id: 1,
     label: "Overview",
     items: [
-      // {
-      //   title: "Users",
-      //   url: "/dashboard/user",
-      //   icon: Users,
-      // },
+      {
+        title: "Users",
+        url: "/dashboard/user",
+        icon: Users,
+      },
+    ],
+  },
+  {
+    id: 2,
+    label: "Services",
+    items: [
       {
         title: "Tours",
         url: "/dashboard/tour",
@@ -42,7 +48,7 @@ export const sidebarItems: NavGroup[] = [
       },
       {
         title: "Booking",
-        url: "/dashboard/master",
+        url: "/dashboard/booking",
         icon: ConciergeBell,
       },
     ],

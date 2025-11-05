@@ -77,12 +77,7 @@ export function TableCards() {
 
         <CardContent className="flex size-full flex-col gap-4">
           <div className="overflow-hidden rounded-md border">
-            {loading ? (
-              <TableSkeleton />
-            ) : (
-              // <div className="text-muted-foreground p-4 text-center text-sm">Loading...</div>
-              <DataTable table={table} columns={recentLeadsColumns} />
-            )}
+            {loading ? <TableSkeleton /> : <DataTable table={table} columns={recentLeadsColumns} />}
           </div>
 
           <div className="flex flex-col justify-between gap-1.5 md:flex-row">

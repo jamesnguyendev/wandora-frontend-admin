@@ -13,34 +13,40 @@ import {
 
 import { DeleteConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
-import { UpdateFollower } from "./update-follower";
+import { UpdateBooking } from "./update-booking";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Follower ID" />,
-    cell: ({ row }) => <span>{row.original.id}</span>,
+    accessorKey: "startDate",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Start date" />,
+    cell: ({ row }) => {
+      const date = row.original.startDate ? new Date(row.original.startDate) : "No data";
+
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: true,
   },
   {
-    accessorKey: "masterId",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
-    cell: ({ row }) => <span>{row.original.masterId}</span>,
+    accessorKey: "endDate",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="End date" />,
+    cell: ({ row }) => {
+      const date = row.original.endDate ? new Date(row.original.endDate) : "No data";
+
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: true,
   },
   {
-    accessorKey: "password",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.password}</span>,
-    meta: { title: "Mật khẩu" },
+    accessorKey: "totalPrice",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Total price" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.totalPrice}</span>,
     enableSorting: false,
   },
   {
     accessorKey: "createdAt",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày tạo" />,
-    meta: { title: "Ngày tạo" },
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Created at" />,
     cell: ({ row }) => {
-      const date = row.original.createdAt ? new Date(row.original.createdAt) : "Không dữ liệu";
+      const date = row.original.createdAt ? new Date(row.original.createdAt) : "No data";
 
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
@@ -48,16 +54,15 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   },
   {
     accessorKey: "updatedAt",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày cập nhật" />,
-    meta: { title: "Ngày update" },
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Updated at" />,
     cell: ({ row }) => {
-      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "Không dữ liệu";
+      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "No data";
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
     enableSorting: true,
   },
   {
-    header: "Hành động",
+    header: "Actions",
     id: "actions",
     cell: ({ row }) => (
       <DropdownMenu>
@@ -68,7 +73,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <UpdateFollower item={row.original} />
+          <UpdateBooking item={row.original} />
           <DropdownMenuSeparator />
           <DeleteConfirm id={row.original.id} />
         </DropdownMenuContent>

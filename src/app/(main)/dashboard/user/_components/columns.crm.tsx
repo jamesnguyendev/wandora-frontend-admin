@@ -3,7 +3,6 @@ import { EllipsisVertical } from "lucide-react";
 import z from "zod";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,53 +17,32 @@ import { UpdateUser } from "./update-user";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   {
-    accessorKey: "name",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Tên" />,
-    cell: ({ row }) => <span>{row.original.name}</span>,
-    enableSorting: true,
-  },
-  {
     accessorKey: "email",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
     cell: ({ row }) => <span>{row.original.email}</span>,
-    enableSorting: false,
+    enableSorting: true,
   },
   {
-    accessorKey: "phone",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Số điện thoại" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.phone}</span>,
-    meta: { title: "Số điện thoại" },
-    enableSorting: false,
+    accessorKey: "role",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.role}</span>,
+    enableSorting: true,
   },
   {
-    accessorKey: "verify",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Trạng thái" />,
+    accessorKey: "verified",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Verified" />,
     cell: ({ row }) => {
-      const status = row.original.verify;
+      const verified = row.original.verified ? "Verified" : "Unverified";
 
-      const statusColor =
-        status === "approved"
-          ? "text-green-500 dark:text-green-400 border-green-500"
-          : status === "rejected"
-            ? "text-red-500 dark:text-red-300 border-red-300"
-            : "text-black-500 dark:text-gray-400";
-
-      return (
-        <Badge variant="outline" className={`px-1.5 font-medium capitalize ${statusColor}`}>
-          {status}
-        </Badge>
-      );
+      return <span className="text-muted-foreground tabular-nums">{verified}</span>;
     },
-
-    meta: { title: "Trạng thái" },
     enableSorting: true,
   },
   {
     accessorKey: "createdAt",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày tạo" />,
-    meta: { title: "Ngày tạo" },
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Created at" />,
     cell: ({ row }) => {
-      const date = row.original.createdAt ? new Date(row.original.createdAt) : "Không dữ liệu";
+      const date = row.original.createdAt ? new Date(row.original.createdAt) : "No data";
 
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
@@ -72,16 +50,15 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   },
   {
     accessorKey: "updatedAt",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày cập nhật" />,
-    meta: { title: "Ngày update" },
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Updated at" />,
     cell: ({ row }) => {
-      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "Không dữ liệu";
+      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "No data";
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
     enableSorting: true,
   },
   {
-    header: "Hành động",
+    header: "actions",
     id: "actions",
     cell: ({ row }) => (
       <DropdownMenu>
@@ -94,7 +71,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
         <DropdownMenuContent align="end" className="w-32">
           <UpdateUser item={row.original} />
           <DropdownMenuSeparator />
-          <DeleteConfirm id={row.original._id} />
+          <DeleteConfirm id={row.original.id} />
         </DropdownMenuContent>
       </DropdownMenu>
     ),

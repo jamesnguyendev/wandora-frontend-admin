@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { toast } from "sonner";
+
 import { DeleteUser } from "@/actions/user/delete-user";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -11,8 +13,13 @@ export function DeleteConfirm({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const handleDelete = () => {
-    DeleteUser(id);
+  const handleDelete = async () => {
+    const res = await DeleteUser(id);
+
+    if (res.code !== 200) return;
+
+    toast.success(res.message ?? "Delete data successful");
+
     router.refresh();
     setOpen(false);
   };
@@ -26,20 +33,20 @@ export function DeleteConfirm({ id }: { id: string }) {
           setOpen(true);
         }}
       >
-        Xóa
+        Delete
       </DropdownMenuItem>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Bạn có chắc chắn muốn xóa?</DialogTitle>
+            <DialogTitle>Do you want to delete?</DialogTitle>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpen(false)}>
-              Hủy
+              Cancel
             </Button>
             <Button variant="destructive" onClick={handleDelete}>
-              Xóa
+              Delete
             </Button>
           </DialogFooter>
         </DialogContent>

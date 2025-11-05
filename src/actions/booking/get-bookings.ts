@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
 
-export async function getUsers() {
+export async function getBookings() {
   const session = await getServerSession(authOptions);
 
   if (!session) throw new Error("Unauthorized");
@@ -13,17 +13,16 @@ export async function getUsers() {
   const accessToken = session.user.accessToken;
 
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.data;
   } catch (error) {
-    console.error("Error fetching users:", error);
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message && "Failed to fetch users");
+      throw new Error(error.response?.data?.message && "Failed to fetch getBookings");
     }
-    throw new Error("Failed to fetch users");
+    throw new Error("Failed to fetch getBookings");
   }
 }

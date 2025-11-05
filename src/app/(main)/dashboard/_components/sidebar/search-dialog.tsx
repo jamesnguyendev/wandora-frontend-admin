@@ -17,10 +17,10 @@ import {
 } from "@/components/ui/command";
 
 const searchItems = [
-  { group: "Overview", icon: LayoutDashboard, label: "Home", link: "/dashboard/default" },
+  { group: "Overview", icon: LayoutDashboard, label: "Home", link: "/dashboard/user" },
   { group: "Overview", icon: Users, label: "Users", link: "/dashboard/user" },
-  { group: "Copy Trade", icon: UserRoundCheck, label: "Follower", link: "/dashboard/follower", disabled: true },
-  { group: "Copy Trade", icon: LinkIcon, label: "Master", link: "/dashboard/master", disabled: true },
+  { group: "Services", icon: UserRoundCheck, label: "Tour", link: "/dashboard/tour", disabled: true },
+  { group: "Services", icon: LinkIcon, label: "Booking", link: "/dashboard/booking", disabled: true },
 ];
 
 export function SearchDialog() {
