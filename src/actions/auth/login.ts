@@ -1,7 +1,5 @@
 import axios, { AxiosError } from "axios";
 
-import { FRONTEND_KEY } from "../tour";
-
 interface LoginResponse {
   token: string;
   userData: {
@@ -21,7 +19,7 @@ export async function login(email: string, password: string): Promise<LoginRespo
         email,
         password,
       },
-      { headers: { "Content-Type": "application/json", "x-frontend-key": FRONTEND_KEY } },
+      { headers: { "Content-Type": "application/json" } },
     );
     return res.data;
   } catch (error) {

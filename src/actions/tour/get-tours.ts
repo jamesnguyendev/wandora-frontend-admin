@@ -2,16 +2,10 @@
 
 import axios from "axios";
 
-import { FRONTEND_KEY } from "./add-tour";
-
 export async function getTours(page = 1, limit = 10) {
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/listings`, {
       params: { page, limit },
-      headers: {
-        "x-frontend-key": FRONTEND_KEY,
-      },
-      withCredentials: true,
     });
     return res.data;
   } catch (error) {
