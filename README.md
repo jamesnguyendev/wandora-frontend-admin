@@ -17,10 +17,11 @@ With a focus on performance, scalability, and clean architecture, this dashboard
 - **TypeScript**
 - **Tailwind CSS 4**
 - **Radix UI / ShadCN UI**
+- **Zustand Management**
 - **TanStack Query & Table**
 - **Next-Themes** for dark/light mode
 
-### **Backend**
+### **Security and fetch**
 
 - **NextAuth.js** for authentication
 - **Axios** for API communication
