@@ -55,7 +55,6 @@ export function LoginForm() {
 
   return (
     <div className="mx-auto max-w-sm space-y-6">
-      {/* <h1 className="text-xl font-bold">Login</h1> */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
