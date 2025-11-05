@@ -1,132 +1,128 @@
-# 📈 TradeHubPro Dashboard
-
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/jamesnguyendev/tradehubpro-dashboard)  
-[![License](https://img.shields.io/github/license/jamesnguyendev/tradehubpro-dashboard)](LICENSE)  
-[![GitHub stars](https://img.shields.io/github/stars/jamesnguyendev/tradehubpro-dashboard.svg?style=social&label=Star)](https://github.com/jamesnguyendev/tradehubpro-dashboard)  
-
----
+# 🧭 Wandora Admin Dashboard
 
 ## 📌 Introduction
 
-The **TradeHubPro Dashboard** is a comprehensive user interface designed to provide traders with the ability to **monitor, analyze, and manage** their trading activities efficiently and intuitively.  
-
-This application delivers **real-time charts, statistical metrics, and analytical tools** to help users make informed trading decisions.  
+**Wandora Admin** is a modern, full-featured administration panel built with **Next.js**, **TypeScript**, and **Tailwind CSS**.  
+It provides robust management tools, analytics, and a fully customizable interface designed for trading and portfolio monitoring.  
+With a focus on performance, scalability, and clean architecture, this dashboard is ideal for both startup and enterprise environments.
 
 ---
 
 ## ✨ Key Features
 
-* **Performance Analytics:** Track vital metrics like P&L (Profit & Loss), Max Drawdown, and Win/Loss Ratios.  
-* **Visual Trading Charts:** Interactive charts for trading history and performance.  
-* **Order Book Management:** View pending and executed orders in real-time.  
-* **Multi-Exchange Integration:** Connect to multiple trading exchanges (if applicable).  
-* **Dark/Light Mode:** User interface preference options.  
-* **Authentication & Security:** NextAuth.js + bcrypt password hashing.  
-* **Customizable UI:** Drag & Drop components using `@dnd-kit`.  
+- **Performance Analytics:** Track vital metrics like P&L (Profit & Loss), Max Drawdown, and Win/Loss Ratios.
+- **Visual Trading Charts:** Interactive charts for trading history and performance.
+- **Order Book Management:** View pending and executed orders in real-time.
+- **Multi-Exchange Integration:** Connect to multiple trading exchanges (if applicable).
+- **Dark/Light Mode:** User interface preference options.
+- **Authentication & Security:** Secure login using NextAuth.js with bcrypt password hashing.
+- **Customizable UI:** Drag & Drop layout customization powered by `@dnd-kit`.
 
 ---
 
-## 🛠️ Technology Stacks
+## 🛠️ Technology Stack
 
-A list of the main technologies and libraries used in this project:
+### **Frontend**
 
-* **Frontend:**
-  * Next.js (React 19, App Router)
-  * Tailwind CSS 4, Radix UI, Lucide Icons
-  * Recharts (Data Visualization), React Hook Form + Zod (Forms & Validation)
+- **Next.js 15** (App Router + Turbopack)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Radix UI / ShadCN UI**
+- **Zustand** for state management
+- **TanStack Query & Table**
+- **Recharts** for analytics visualization
+- **Next-Themes** for dark/light mode
 
-* **Backend & API:**
-  * Node.js (Next.js API Routes)
-  * NextAuth.js (Authentication)
-  * bcrypt / bcryptjs (Password Hashing)
- 
-* **Database:**
-  * MongoDB
-  * Mongoose (ODM)
+### **Backend**
 
----
+- **NextAuth.js** for authentication
+- **Axios** for API communication
+- **bcrypt / bcryptjs** for password hashing
 
-## 🚀 Installation and Setup
+### **Database**
 
-### Prerequisites
-
-* Node.js `>= 18.x`  
-* pnpm / npm / yarn  
-
-### Steps
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/jamesnguyendev/tradehubpro-dashboard.git
-   cd tradehubpro-dashboard
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pnpm install
-   # OR
-   npm install
-   # OR
-   yarn install
-   ```
-
-3. **Configure Environment Variables:**
-   Create a `.env.local` file in the root directory:
-   ```env
-   NEXTAUTH_SECRET=your_secret
-   NEXTAUTH_URL=http://localhost:3000
-   EMAIL="youremail"
-   PASSWORD="yourpassword"
-   NEXT_PUBLIC_API_URL=your_local_host/api
-   MONGODB_URI=mongodb://localhost:27017/tradehubpro
-   ```
-
-4. **Run the application (development):**
-   ```bash
-   pnpm dev
-   # OR
-   npm run dev
-   # OR
-   yarn dev
-   ```
-   The app will be available at: [http://localhost:3000](http://localhost:3000)
-
-5. **Build for production:**
-   ```bash
-   npm build
-   npm start
-   ```
+- Compatible with **PostgreSQL**, **MySQL**, **MongoDB**, or other API-based data sources  
+  (via custom backend or API integration).
 
 ---
 
-## ⚙️ Main Project Structure
+## ⚙️ Setup & Installation
 
-```
-src/
-  app/          -> Next.js app router (pages & routes)
-  components/   -> UI components
-  hooks/        -> Custom React hooks
-  lib/          -> Utils & config
-  models/       -> Mongoose schemas
-  services/     -> API services (axios, react-query)
-  store/        -> Zustand state management
-public/         -> Static assets
-styles/         -> Global styles
-package.json
-README.md
+```bash
+# 1️⃣ Clone the repository
+git clone https://github.com/your-org/wandora-frontend-admin.git
+cd wandora-frontend-admin
+
+# 2️⃣ Install dependencies
+npm install
+
+# 3️⃣ Set up environment variables
+cp .env
+
+NEXTAUTH_SECRET=your-secret-key
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
 ```
 
 ---
 
-## 🔐 Security
+### **Project Structure**
 
-* Password hashing with bcrypt / bcryptjs  
-* ESLint plugins: `eslint-plugin-security`, `eslint-plugin-sonarjs`  
-* OWASP-aligned best practices  
+wandora-frontend-admin/
+│
+├── src/
+│ ├── app/ # Next.js app router pages
+│ ├── components/ # Shared React UI components
+│ ├── hooks/ # Custom React hooks
+│ ├── lib/ # Utility functions and constants
+│ ├── store/ # Zustand stores (global state)
+│ ├── types/ # TypeScript interfaces and models
+│ ├── utils/ # Helper functions (token, format, etc.)
+│ └── scripts/ # Node scripts (theme generation, etc.)
+│
+├── public/ # Static assets (images, icons, etc.)
+├── styles/ # Global styles or Tailwind configs
+├── .env # Example environment configuration
+├── package.json # Dependencies and project scripts
+├── tsconfig.json # TypeScript configuration
+├── tailwind.config.ts # Tailwind configuration
+└── README.md # Documentation
+
+============================================================
+🔐 SECURITY
+============================================================
+
+• Passwords are hashed using bcrypt before storage.
+• Authentication is handled securely with NextAuth.js.
+• Environment variables are safely managed through .env.local.
+• Adheres to OWASP and Next.js security best practices.
+• Linting includes eslint-plugin-security and eslint-plugin-sonarjs
+for static code analysis.
 
 ---
 
-## 📜 License
+============================================================
+📦 DEPLOYMENT
+============================================================
 
-MIT License © 2025 [James Nguyen / Org]  
-# wandora-frontend-admin
+You can deploy easily to the following platforms:
+
+→ Vercel (recommended for Next.js)
+→ Netlify
+→ Render
+→ Any Node.js-based hosting platform
+
+⚙️ Make sure your environment variables are correctly configured
+in your deployment environment.
+
+---
+
+============================================================
+📜 LICENSE
+============================================================
+
+MIT License © 2025 James Nguyen / Org
+Project: wandora-frontend-admin
+
+============================================================
