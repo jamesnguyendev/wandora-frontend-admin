@@ -8,4 +8,5 @@ export const recentLeadSchema = z.object({
   longitude: z.number(),
   priceBase: z.number(),
   type: z.enum(["room", "experience"]),
+  imageUrl: z.string().optional(),
 });

@@ -12,7 +12,7 @@ export async function getTours(page = 1, limit = 10) {
     console.error("Error fetching listings:", error);
     if (axios.isAxiosError(error)) {
       console.error("Failed to fetch listings");
-      // throw new Error(error.response?.data?.message && "Failed to fetch listings");
+      throw new Error(error.response?.data?.message && "Failed to fetch listings");
     }
     throw new Error("Failed to fetch listings");
   }

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisVertical } from "lucide-react";
 import z from "zod";
@@ -14,8 +16,21 @@ import {
 import { TourConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
 import UpdateTour from "./update-tour";
+import UploadImageTour from "./upload-image-tour";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
+  {
+    accessorKey: "imageUrl",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Image" />,
+    cell: ({ row }) => {
+      const img = row.original.imageUrl;
+
+      if (!img) return <span>No Avatar</span>;
+
+      return <Image src={img} alt="" width={80} height={40} className="rounded-sm object-contain" />;
+    },
+    enableSorting: false,
+  },
   {
     accessorKey: "title",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
@@ -65,6 +80,8 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
           <UpdateTour item={row.original} />
+          <DropdownMenuSeparator />
+          <UploadImageTour id={row.original.id} />
           <DropdownMenuSeparator />
           <TourConfirm id={row.original.id} />
         </DropdownMenuContent>

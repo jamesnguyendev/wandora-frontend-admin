@@ -45,6 +45,7 @@ const formSchema = z.object({
   longitude: z.coerce.number(),
   priceBase: z.coerce.number().min(0),
   type: z.enum(["room", "experience"]),
+  imageUrl: z.string().url().optional(),
 });
 
 const UpdateTour = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
@@ -65,6 +66,7 @@ const UpdateTour = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
       longitude: item.longitude,
       priceBase: item.priceBase,
       type: item.type,
+      imageUrl: item.imageUrl,
     },
   });
 
@@ -79,6 +81,7 @@ const UpdateTour = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
         longitude: values.longitude,
         priceBase: values.priceBase,
         type: values.type,
+        imageUrl: values.imageUrl,
       };
 
       const res = await updateTour(payload, accessToken);

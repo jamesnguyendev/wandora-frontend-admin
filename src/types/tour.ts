@@ -6,6 +6,7 @@ export interface tour {
   longitude: number;
   priceBase: number;
   type: "room" | "experience";
+  imageUrl?: string;
 }
 
 export type CreateTour = Omit<tour, "id">;
