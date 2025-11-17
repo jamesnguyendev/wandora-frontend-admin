@@ -1,10 +1,10 @@
 import axios from "axios";
 
 import { CreateTour } from "@/types";
-import { getValidAccessToken } from "@/utils/auth/get-valid-access-token";
+// import { getValidAccessToken } from "@/utils/auth/get-valid-access-token";
 
-export const addTour = async (payload: CreateTour) => {
-  const accessToken = await getValidAccessToken();
+export const addTour = async (payload: CreateTour, accessToken?: string) => {
+  // const accessToken = await getValidAccessToken();
 
   try {
     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/listings`, payload, {
