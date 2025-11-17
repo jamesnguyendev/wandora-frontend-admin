@@ -83,7 +83,7 @@ const AddTour = () => {
 
       router.refresh();
     } catch (err: any) {
-      toast.error(err.message || "Có lỗi xảy ra khi thêm master");
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
